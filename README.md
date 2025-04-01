@@ -6,5 +6,5 @@
 - 🤔 I’m looking for help with ...
 - 💬 Ask me about everything
 - 📫 How to reach me: Discord: vafls.
-- ⚡ Fun fact: hate niggers
+- ⚡ Fun fact: ...
 -->
