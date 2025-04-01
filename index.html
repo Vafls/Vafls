@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating Shape</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+            overflow: hidden;
+            margin: 0;
+        }
+        .container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            perspective: 1000px;
+        }
+        .shape {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            animation: rotate 5s infinite linear;
+        }
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid black;
+        }
+        .front  { transform: rotateY(  0deg) translateZ(100px); }
+        .back   { transform: rotateY(180deg) translateZ(100px); }
+        .left   { transform: rotateY(-90deg) translateZ(100px); }
+        .right  { transform: rotateY( 90deg) translateZ(100px); }
+        .top    { transform: rotateX( 90deg) translateZ(100px); }
+        .bottom { transform: rotateX(-90deg) translateZ(100px); }
+        
+        @keyframes rotate {
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+        .symbol {
+            position: absolute;
+            font-size: 50px;
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="shape" id="shape">
+            <div class="face front">What Should I place in here?</div>
+            <div class="face back">¿Qué debería poner aquí?</div>
+            <div class="face left">Was sollte ich hier platzieren?</div>
+            <div class="face right">Que devrais-je placer ici?</div>
+            <div class="face top">Что мне здесь написать?</div>
+            <div class="face bottom">我应该放些什么？</div>
+            <div class="symbol">$</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("shape").addEventListener("click", function() {
+            const shapes = ["square", "triangle", "circle", "hexagon"];
+            
+            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+            
+            this.style.borderRadius = randomShape === "circle" ? "50%" : "0";
+        });
+    </script>
+</body>
+</html>
