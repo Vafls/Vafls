@@ -3,17 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who am i?</title>
+    <title>My Interactive Portfolio</title>
     <style>
-        body {
+        :root {
+            --bg-color: #222;
+            --text-color: white;
+            --nav-bg: rgba(51, 51, 51, 0.9);
+            --nav-text: white;
+            --nav-active: gold;
+            --nav-hover: #555;
+            --card-bg: rgba(60, 60, 60, 0.7);
+            --card-border: #444;
+            --face-bg: rgba(255, 255, 255, 0.9);
+            --face-text: black;
+            --symbol-color: gold;
+            --page-bg: rgba(40, 40, 40, 0.8);
+            --accent-color: gold;
+        }
+
+        /* Light theme */
+        :root.light-theme {
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --nav-bg: rgba(245, 245, 245, 0.9);
+            --nav-text: #333;
+            --nav-active: #ffcc00;
+            --nav-hover: #ddd;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-border: #ddd;
+            --face-bg: rgba(240, 240, 240, 0.95);
+            --face-text: #222;
+            --symbol-color: #ff9900;
+            --page-bg: rgba(255, 255, 255, 0.9);
+            --accent-color: #ff9900;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-bg);
+            padding: 10px 0;
+            z-index: 1000;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #222;
-            overflow: hidden;
-            margin: 0;
+            backdrop-filter: blur(5px);
         }
+        .nav-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .nav-item a {
+            color: var(--nav-text);
+            text-decoration: none;
+            font-size: 18px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-family: 'Arial', sans-serif;
+        }
+        .nav-item a:hover {
+            background-color: var(--nav-hover);
+            transform: translateY(-2px);
+        }
+        .nav-item a.active {
+            background-color: var(--nav-active);
+            color: #222;
+            font-weight: bold;
+        }
+
+        /* Theme and Language Switchers */
+        .switcher {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+        .theme-switcher, .lang-switcher {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .theme-switcher:hover, .lang-switcher:hover {
+            background: var(--nav-hover);
+        }
+        
+        /* Main Content Styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding-top: 60px;
+            font-family: 'Arial', sans-serif;
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Page Styles */
+        .page {
+            display: none;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--page-bg);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        /* Cube Styles */
+        .cube-container {
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+        }
+        
         .container {
             position: relative;
             width: 200px;
@@ -25,13 +168,14 @@
             height: 100%;
             position: absolute;
             transform-style: preserve-3d;
-            animation: rotate 5s infinite linear;
+            animation: rotate 10s infinite linear;
+            cursor: pointer;
         }
         .face {
             position: absolute;
             width: 200px;
             height: 200px;
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--face-bg);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -39,13 +183,45 @@
             font-weight: bold;
             text-align: center;
             border: 2px solid black;
+            color: var(--face-text);
+            box-sizing: border-box;
         }
-        .front  { transform: rotateY(  0deg) translateZ(100px); }
-        .back   { transform: rotateY(180deg) translateZ(100px); }
-        .left   { transform: rotateY(-90deg) translateZ(100px); }
-        .right  { transform: rotateY( 90deg) translateZ(100px); }
-        .top    { transform: rotateX( 90deg) translateZ(100px); }
-        .bottom { transform: rotateX(-90deg) translateZ(100px); }
+        
+        /* Cube */
+        .shape.cube .front  { transform: rotateY(  0deg) translateZ(100px); }
+        .shape.cube .back   { transform: rotateY(180deg) translateZ(100px); }
+        .shape.cube .left   { transform: rotateY(-90deg) translateZ(100px); }
+        .shape.cube .right  { transform: rotateY( 90deg) translateZ(100px); }
+        .shape.cube .top    { transform: rotateX( 90deg) translateZ(100px); }
+        .shape.cube .bottom { transform: rotateX(-90deg) translateZ(100px); }
+        
+        /* Sphere */
+        .shape.sphere {
+            border-radius: 50%;
+        }
+        .shape.sphere .face {
+            border-radius: 50%;
+        }
+        .shape.sphere .front  { transform: rotateY(  0deg) translateZ(100px); }
+        .shape.sphere .back   { transform: rotateY(180deg) translateZ(100px); }
+        .shape.sphere .left   { transform: rotateY(-90deg) translateZ(100px); }
+        .shape.sphere .right  { transform: rotateY( 90deg) translateZ(100px); }
+        .shape.sphere .top    { transform: rotateX( 90deg) translateZ(100px); }
+        .shape.sphere .bottom { transform: rotateX(-90deg) translateZ(100px); }
+        
+        /* Cylinder */
+        .shape.cylinder .front,
+        .shape.cylinder .back,
+        .shape.cylinder .left,
+        .shape.cylinder .right {
+            border-radius: 50%;
+        }
+        .shape.cylinder .front  { transform: rotateY(  0deg) translateZ(100px); }
+        .shape.cylinder .back   { transform: rotateY(180deg) translateZ(100px); }
+        .shape.cylinder .left   { transform: rotateY(-90deg) translateZ(100px); }
+        .shape.cylinder .right  { transform: rotateY( 90deg) translateZ(100px); }
+        .shape.cylinder .top    { transform: rotateX( 90deg) translateZ(100px); border-radius: 50%; }
+        .shape.cylinder .bottom { transform: rotateX(-90deg) translateZ(100px); border-radius: 50%; }
         
         @keyframes rotate {
             from {
@@ -58,30 +234,439 @@
         .symbol {
             position: absolute;
             font-size: 50px;
-            color: gold;
+            color: var(--symbol-color);
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--card-border);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+        
+        .project-card h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+        }
+        
+        /* Topics List */
+        .topics-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .topics-list li {
+            background: var(--card-bg);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .topics-list li:hover {
+            background: var(--nav-hover);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="shape" id="shape">
-            <div class="face front">What Should I place in here?</div>
-            <div class="face back">¿Qué debería poner aquí?</div>
-            <div class="face left">Was sollte ich hier platzieren?</div>
-            <div class="face right">Que devrais-je placer ici?</div>
-            <div class="face top">Что мне здесь написать?</div>
-            <div class="face bottom">我应该放些什么？</div>
-            <div class="symbol">$</div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="#" class="nav-link active" data-page="home" data-i18n="nav.home">Home Cube</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="whoami" data-i18n="nav.whoami">Who am I?</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="projects" data-i18n="nav.projects">My Projects</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-page="askme" data-i18n="nav.askme">Ask me about...</a></li>
+            
+            <div class="switcher">
+                <div class="theme-switcher" id="themeSwitcher">
+                    <span class="theme-icon">🌓</span>
+                    <span data-i18n="theme.dark">Dark</span>
+                </div>
+                <div class="lang-switcher" id="langSwitcher">
+                    <span class="lang-icon">🌐</span>
+                    <span data-i18n="lang.en">EN</span>
+                </div>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- Home Page with Cube -->
+    <div class="page active" id="home">
+        <h1 data-i18n="home.title">Interactive Portfolio</h1>
+        <div class="cube-container">
+            <div class="container">
+                <div class="shape cube" id="main-shape">
+                    <div class="face front" data-i18n="cube.home.front">Welcome to my world!</div>
+                    <div class="face back" data-i18n="cube.home.back">Explore my projects</div>
+                    <div class="face left" data-i18n="cube.home.left">Discover who I am</div>
+                    <div class="face right" data-i18n="cube.home.right">Ask me anything</div>
+                    <div class="face top" data-i18n="cube.home.top">Interactive portfolio</div>
+                    <div class="face bottom" data-i18n="cube.home.bottom">Click to transform</div>
+                    <div class="symbol">$</div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Who am I? Page -->
+    <div class="page" id="whoami">
+        <h1 data-i18n="whoami.title">Who am I?</h1>
+        <p data-i18n="whoami.text1">Hello! I'm a creative developer passionate about building interactive experiences that blend art and technology.</p>
+        <p data-i18n="whoami.text2">With a background in both design and programming, I specialize in creating visually stunning web applications that engage users on multiple levels.</p>
+        <p data-i18n="whoami.text3">When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or creating digital art.</p>
+        
+        <div class="cube-container">
+            <div class="container">
+                <div class="shape cube" id="whoami-shape">
+                    <div class="face front" data-i18n="cube.whoami.front">Curious</div>
+                    <div class="face back" data-i18n="cube.whoami.back">Creative</div>
+                    <div class="face left" data-i18n="cube.whoami.left">Detail-oriented</div>
+                    <div class="face right" data-i18n="cube.whoami.right">Passionate</div>
+                    <div class="face top" data-i18n="cube.whoami.top">Problem-solver</div>
+                    <div class="face bottom" data-i18n="cube.whoami.bottom">Innovative</div>
+                    <div class="symbol">?</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Projects Page -->
+    <div class="page" id="projects">
+        <h1 data-i18n="projects.title">My Projects</h1>
+        <p data-i18n="projects.text">Here are some of my recent works that showcase my skills and creativity:</p>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3 data-i18n="projects.project1.title">3D Web Gallery</h3>
+                <p data-i18n="projects.project1.desc">An interactive 3D art gallery built with Three.js that allows users to virtually walk through exhibitions.</p>
+            </div>
+            <div class="project-card">
+                <h3 data-i18n="projects.project2.title">AI Poetry Generator</h3>
+                <p data-i18n="projects.project2.desc">Machine learning application that creates unique poems based on user input and mood selection.</p>
+            </div>
+            <div class="project-card">
+                <h3 data-i18n="projects.project3.title">Interactive Data Visualizations</h3>
+                <p data-i18n="projects.project3.desc">A collection of dynamic data representations that respond to user interactions.</p>
+            </div>
+            <div class="project-card">
+                <h3 data-i18n="projects.project4.title">Augmented Reality Business Cards</h3>
+                <p data-i18n="projects.project4.desc">Physical business cards that come to life with AR content when viewed through a smartphone.</p>
+            </div>
+        </div>
+        
+        <div class="cube-container" style="margin-top: 40px;">
+            <div class="container">
+                <div class="shape cube" id="projects-shape">
+                    <div class="face front" data-i18n="cube.projects.front">Innovation</div>
+                    <div class="face back" data-i18n="cube.projects.back">Technology</div>
+                    <div class="face left" data-i18n="cube.projects.left">Design</div>
+                    <div class="face right" data-i18n="cube.projects.right">Creativity</div>
+                    <div class="face top" data-i18n="cube.projects.top">Code</div>
+                    <div class="face bottom" data-i18n="cube.projects.bottom">Art</div>
+                    <div class="symbol">+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ask me about... Page -->
+    <div class="page" id="askme">
+        <h1 data-i18n="askme.title">Ask me about...</h1>
+        <p data-i18n="askme.text">I'm always excited to discuss these topics. Feel free to reach out if you want to talk about:</p>
+        
+        <ul class="topics-list">
+            <li><strong data-i18n="askme.topic1.title">Creative Coding:</strong> <span data-i18n="askme.topic1.desc">How to blend programming with artistic expression</span></li>
+            <li><strong data-i18n="askme.topic2.title">Lua scripting:</strong> <span data-i18n="askme.topic2.desc">Building usefull scripts in lua</span></li>
+            <li><strong data-i18n="askme.topic3.title">UI/UX Design:</strong> <span data-i18n="askme.topic3.desc">Creating interfaces that are both beautiful and functional</span></li>
+            <li><strong data-i18n="askme.topic4.title">Emerging Technologies:</strong> <span data-i18n="askme.topic4.desc">AR/VR, AI in creative applications, and more</span></li>
+            <li><strong data-i18n="askme.topic5.title">Open Source:</strong> <span data-i18n="askme.topic5.desc">Contributing to and maintaining open source projects</span></li>
+        </ul>
+        
+        <div class="cube-container">
+            <div class="container">
+                <div class="shape cube" id="askme-shape">
+                    <div class="face front" data-i18n="cube.askme.front">Ideas</div>
+                    <div class="face back" data-i18n="cube.askme.back">Collaboration</div>
+                    <div class="face left" data-i18n="cube.askme.left">Technology</div>
+                    <div class="face right" data-i18n="cube.askme.right">Design</div>
+                    <div class="face top" data-i18n="cube.askme.top">Future</div>
+                    <div class="face bottom" data-i18n="cube.askme.bottom">Solutions</div>
+                    <div class="symbol">!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.getElementById("shape").addEventListener("click", function() {
-            const shapes = ["square", "triangle", "circle", "hexagon"];
-            
-            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-            
-            this.style.borderRadius = randomShape === "circle" ? "50%" : "0";
+        // Current shape state
+        let currentShape = 'cube';
+        const shapes = ['cube', 'sphere', 'cylinder'];
+        
+        // Language state
+        let currentLang = 'en';
+        const translations = {
+            'en': {
+                'nav.home': 'Home',
+                'nav.whoami': 'Who am I?',
+                'nav.projects': 'My Projects',
+                'nav.askme': 'Ask me about...',
+                'theme.dark': 'Dark',
+                'theme.light': 'Light',
+                'lang.en': 'EN',
+                'lang.ru': 'RU',
+                'home.title': 'Welcome!',
+                'cube.home.front': 'Welcome to my world!',
+                'cube.home.back': 'Explore my projects',
+                'cube.home.left': 'Discover who I am',
+                'cube.home.right': 'Ask me anything',
+                'cube.home.top': 'Interactive portfolio',
+                'cube.home.bottom': '#gnu',
+                'whoami.title': 'Who am I?',
+                'whoami.text1': 'Hello! I\'m a creative developer passionate about building interactive experiences that blend art and technology.',
+                'whoami.text2': 'With a background in both design and programming, I specialize in creating visually stunning web applications that engage users on multiple levels.',
+                'whoami.text3': 'When I\'m not coding, you can find me exploring new technologies, contributing to open-source projects, or creating digital art.',
+                'cube.whoami.front': 'Curious',
+                'cube.whoami.back': 'Creative',
+                'cube.whoami.left': 'Detail-oriented',
+                'cube.whoami.right': 'Passionate',
+                'cube.whoami.top': 'Problem-solver',
+                'cube.whoami.bottom': 'Innovative',
+                'projects.title': 'My Projects',
+                'projects.text': 'Here are some of my recent works that showcase my skills and creativity:',
+                'projects.project1.title': '3D Web Gallery',
+                'projects.project1.desc': 'An interactive 3D art gallery built with Three.js that allows users to virtually walk through exhibitions.',
+                'projects.project2.title': 'AI Poetry Generator',
+                'projects.project2.desc': 'Machine learning application that creates unique poems based on user input and mood selection.',
+                'projects.project3.title': 'Interactive Data Visualizations',
+                'projects.project3.desc': 'A collection of dynamic data representations that respond to user interactions.',
+                'projects.project4.title': 'Augmented Reality Business Cards',
+                'projects.project4.desc': 'Physical business cards that come to life with AR content when viewed through a smartphone.',
+                'cube.projects.front': 'Innovation',
+                'cube.projects.back': 'Technology',
+                'cube.projects.left': 'Design',
+                'cube.projects.right': 'Creativity',
+                'cube.projects.top': 'Code',
+                'cube.projects.bottom': 'Art',
+                'askme.title': 'Ask me about...',
+                'askme.text': 'I\'m always excited to discuss these topics. Feel free to reach out if you want to talk about:',
+                'askme.topic1.title': 'Creative Coding:',
+                'askme.topic1.desc': 'How to blend programming with artistic expression',
+                'askme.topic2.title': 'WebGL & Three.js:',
+                'askme.topic2.desc': 'Building immersive 3D web experiences',
+                'askme.topic3.title': 'UI/UX Design:',
+                'askme.topic3.desc': 'Creating interfaces that are both beautiful and functional',
+                'askme.topic4.title': 'Emerging Technologies:',
+                'askme.topic4.desc': 'AR/VR, AI in creative applications, and more',
+                'askme.topic5.title': 'Open Source:',
+                'askme.topic5.desc': 'Contributing to and maintaining open source projects',
+                'cube.askme.front': 'Ideas',
+                'cube.askme.back': 'Collaboration',
+                'cube.askme.left': 'Technology',
+                'cube.askme.right': 'Design',
+                'cube.askme.top': 'Future',
+                'cube.askme.bottom': 'Solutions'
+            },
+            'ru': {
+                'nav.home': 'Главная',
+                'nav.whoami': 'Обо мне',
+                'nav.projects': 'Мои проекты',
+                'nav.askme': 'Спросите меня о...',
+                'theme.dark': 'Тёмная',
+                'theme.light': 'Светлая',
+                'lang.en': 'EN',
+                'lang.ru': 'RU',
+                'home.title': 'Добро пожаловать!',
+                'cube.home.front': 'Добро пожаловать в мой мир!',
+                'cube.home.back': 'Исследуйте мои проекты',
+                'cube.home.left': 'Узнайте, кто я',
+                'cube.home.right': 'Спросите что угодно',
+                'cube.home.top': 'Добро пожаловать!',
+                'cube.home.bottom': '#свободакоду',
+                'whoami.title': 'Обо мне',
+                'whoami.text1': 'Привет! Я креативный разработчик, увлечённый созданием интерактивных проектов на стыке искусства и технологий.',
+                'whoami.text2': 'С опытом в дизайне и программировании, я специализируюсь на создании визуально потрясающих веб-приложений, которые вовлекают пользователей на разных уровнях.',
+                'whoami.text3': 'Когда я не пишу код, вы можете найти меня изучающим новые технологии, участвующим в open-source проектах или создающим цифровое искусство.',
+                'cube.whoami.front': 'Любознательный',
+                'cube.whoami.back': 'Креативный',
+                'cube.whoami.left': 'Внимательный к деталям',
+                'cube.whoami.right': 'Страстный',
+                'cube.whoami.top': 'Решатель проблем',
+                'cube.whoami.bottom': 'Инновационный',
+                'projects.title': 'Мои проекты',
+                'projects.text': 'Вот некоторые из моих последних работ, демонстрирующих мои навыки и креативность:',
+                'projects.project1.title': '3D Веб-Галерея',
+                'projects.project1.desc': 'Интерактивная 3D художественная галерея, созданная с Three.js, позволяющая виртуально гулять по выставкам.',
+                'projects.project2.title': 'Генератор поэзии на ИИ',
+                'projects.project2.desc': 'Приложение на машинном обучении, создающее уникальные стихи на основе пользовательского ввода и выбранного настроения.',
+                'projects.project3.title': 'Интерактивная визуализация данных',
+                'projects.project3.desc': 'Коллекция динамических представлений данных, реагирующих на действия пользователя.',
+                'projects.project4.title': 'Визитки с дополненной реальностью',
+                'projects.project4.desc': 'Физические визитки, которые "оживают" с AR-контентом при просмотре через смартфон.',
+                'cube.projects.front': 'Инновации',
+                'cube.projects.back': 'Технологии',
+                'cube.projects.left': 'Дизайн',
+                'cube.projects.right': 'Креативность',
+                'cube.projects.top': 'Код',
+                'cube.projects.bottom': 'Искусство',
+                'askme.title': 'Спросите меня о...',
+                'askme.text': 'Я всегда рад обсудить эти темы. Не стесняйтесь обращаться, если хотите поговорить о:',
+                'askme.topic1.title': 'Креативном программировании:',
+                'askme.topic1.desc': 'Как сочетать программирование с художественным выражением',
+                'askme.topic2.title': 'WebGL & Three.js:',
+                'askme.topic2.desc': 'Создание иммерсивных 3D веб-экспериенсов',
+                'askme.topic3.title': 'UI/UX дизайне:',
+                'askme.topic3.desc': 'Создание интерфейсов, которые одновременно красивы и функциональны',
+                'askme.topic4.title': 'Новых технологиях:',
+                'askme.topic4.desc': 'AR/VR, ИИ в креативных приложениях и многое другое',
+                'askme.topic5.title': 'Open Source:',
+                'askme.topic5.desc': 'Участие в open source проектах и их поддержка',
+                'cube.askme.front': 'Идеи',
+                'cube.askme.back': 'Коллаборация',
+                'cube.askme.left': 'Технологии',
+                'cube.askme.right': 'Дизайн',
+                'cube.askme.top': 'Будущее',
+                'cube.askme.bottom': 'Решения'
+            }
+        };
+
+        // Navigation between pages
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links and pages
+                document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Show corresponding page
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+            });
         });
+        
+        // Shape click handler
+        function setupShapeClickHandler(shapeElement) {
+            shapeElement.addEventListener('click', function() {
+                // Get current shape index
+                const currentIndex = shapes.indexOf(currentShape);
+                // Calculate next shape index
+                const nextIndex = (currentIndex + 1) % shapes.length;
+                currentShape = shapes[nextIndex];
+                
+                // Update all shapes
+                updateAllShapes(currentShape);
+            });
+        }
+        
+        // Function to update all shapes
+        function updateAllShapes(shapeType) {
+            const allShapes = [
+                document.getElementById('main-shape'),
+                document.getElementById('whoami-shape'),
+                document.getElementById('projects-shape'),
+                document.getElementById('askme-shape')
+            ];
+            
+            allShapes.forEach(shape => {
+                if (shape) {
+                    // Remove all shape classes
+                    shape.classList.remove('cube', 'sphere', 'cylinder');
+                    
+                    // Add the new shape class
+                    shape.classList.add(shapeType);
+                    
+                    // Reset all faces to default
+                    const faces = shape.querySelectorAll('.face');
+                    faces.forEach(face => {
+                        face.style.display = 'flex';
+                        face.style.width = '200px';
+                        face.style.height = '200px';
+                        face.style.clipPath = 'none';
+                        face.style.paddingTop = '0';
+                        face.style.borderRadius = shapeType === 'sphere' || shapeType === 'cylinder' ? '50%' : '0';
+                    });
+                }
+            });
+        }
+        
+        // Theme switcher
+        document.getElementById('themeSwitcher').addEventListener('click', function() {
+            if (document.documentElement.classList.contains('light-theme')) {
+                document.documentElement.classList.remove('light-theme');
+                localStorage.setItem('theme', 'dark');
+                this.querySelector('[data-i18n="theme.dark"]').textContent = translations[currentLang]['theme.dark'];
+            } else {
+                document.documentElement.classList.add('light-theme');
+                localStorage.setItem('theme', 'light');
+                this.querySelector('[data-i18n="theme.dark"]').textContent = translations[currentLang]['theme.light'];
+            }
+        });
+        
+        // Language switcher
+        document.getElementById('langSwitcher').addEventListener('click', function() {
+            currentLang = currentLang === 'en' ? 'ru' : 'en';
+            localStorage.setItem('language', currentLang);
+            translatePage();
+        });
+        
+        // Translate page
+        function translatePage() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+            
+            // Update theme switcher text
+            const themeSwitcher = document.getElementById('themeSwitcher');
+            const isLight = document.documentElement.classList.contains('light-theme');
+            themeSwitcher.querySelector('[data-i18n="theme.dark"]').textContent = 
+                isLight ? translations[currentLang]['theme.light'] : translations[currentLang]['theme.dark'];
+            
+            // Update language switcher text
+            document.querySelector('#langSwitcher [data-i18n="lang.en"]').textContent = 
+                translations[currentLang]['lang.' + (currentLang === 'en' ? 'ru' : 'en')];
+        }
+        
+        // Initialize shape click handlers
+        document.querySelectorAll('.shape').forEach(shape => {
+            setupShapeClickHandler(shape);
+        });
+        
+        // Initialize all shapes
+        updateAllShapes(currentShape);
+        
+        // Initialize theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-theme');
+        }
+        
+        // Initialize language
+        if (localStorage.getItem('language')) {
+            currentLang = localStorage.getItem('language');
+        }
+        translatePage();
     </script>
 </body>
 </html>
