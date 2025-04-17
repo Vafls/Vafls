@@ -53,6 +53,5 @@
 ### 📊 Statistics
 
 ![Vafls' GitHub stats](https://github-readme-stats.vercel.app/api?username=Vafls&show_icons=true&theme=dracula)
-
-<!-- ![GitHub Streak](https://streak-stats.demolab.com?user=ForrestKnight&theme=gruvbox&border_radius=4.5) -->
+![Vafls' Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Vafls&layout=compact&theme=gruvbox)
 
