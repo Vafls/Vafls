@@ -52,7 +52,7 @@
 
 ### 📊 Statistics
 
-![Vafls' GitHub stats]((https://github-readme-stats.vercel.app/api?username=Vafls&show_icons=true&theme=gruvbox)
+![Vafls' GitHub stats]((https://github-readme-stats.vercel.app/api?username=Vafls&show_icons=true&theme=gruvbox))
 
 <!-- ![GitHub Streak](https://streak-stats.demolab.com?user=ForrestKnight&theme=gruvbox&border_radius=4.5) -->
 
