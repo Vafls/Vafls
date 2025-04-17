@@ -1,8 +1,23 @@
-# 🏄‍♂️ Vafls
+# 💜🍇🔮👾☁️ Vafls ☁️👾🔮🍇💜
 
-**`Digital Craftsman (Developer/Filmmaker/Creator)`**
+**`WhoYouTalkingTo (Developer/Creator)`**
 
-I'm an indie full-stack developer and content creator building my version of the digital world one step at a time. All coding projects are built from the ground up, from planning and designing all the way to solving real-life problems with code. All video content is built the same way, from ideation and planning, all the way to finalizing the content with artistic touches. I publish that content on my YouTube channel "[ForrestKnight][youtube]" to more than 500k subscribers.
+Вот английская версия этого блока, стилизованная так же аккуратно и ярко:
+
+---
+
+### 🧑‍💻 About Me:
+- 💡 My name is **Konstantin Vyacheslavovich Sidoruk**, and I’m passionate about **IT, software development, and electronics**.
+- 🎓 I'm currently studying at the **Fachovyi College of Communications**, majoring in **Cybersecurity**.
+- 🖥️ I develop **cross-platform desktop applications** using Python + PyQt5.
+- 💾 I build my own **launchers, GUI shells, key generators, websites, and even Linux distributions**.
+- 🧠 I'm interested in **game modding** (like **DDNet** and **SA:MP**), as well as developing **web interfaces with mobile adaptation**.
+- 🍏 My dream is to work at **Apple**, and I’m a huge fan of **minimalism and the Frutiger Aero aesthetic**.
+- ⚙️ I explore **circuit design**, working with **transistors and hybrid parameters**.
+
+### 🧪 Operating Systems I Use:
+- Fedora Linux 🐧  
+- Windows 🪟
 
    <p align="left">
       <a href="https://www.youtube.com/c/fknight?sub_confirmation=1">
