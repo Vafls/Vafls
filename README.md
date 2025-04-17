@@ -1,4 +1,4 @@
-# 💜🍇🔮👾☁️ Vafls ☁️👾🔮🍇💜
+# ☁️ Vafls ☁️
 
 **`WhoYouTalkingTo (Developer/Creator)`**
 
