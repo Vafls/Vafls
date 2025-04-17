@@ -9,7 +9,7 @@
 - 🎓 I'm currently studying at the **Fachovyi College of Communications**, majoring in **Cybersecurity**.
 - 🖥️ I develop **cross-platform desktop applications** using Python + PyQt5.
 - 💾 I build my own **launchers, GUI shells, key generators, websites, and even Linux distributions**.
-- 🧠 I'm interested in **game modding** (like **DDNet** and **SA:MP**), as well as developing **web interfaces with mobile adaptation**.
+- 🧠 I'm interested in **game modding**, as well as developing **web interfaces with mobile adaptation**.
 - 🍏 My dream is to work at **Apple**, and I’m a huge fan of **minimalism and the Frutiger Aero aesthetic**.
 - ⚙️ I explore **circuit design**, working with **transistors and hybrid parameters**.
 
