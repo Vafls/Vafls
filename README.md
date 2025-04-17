@@ -48,5 +48,5 @@
 ### 🔗 Links
 - [🌍 webpage](https://vafls.github.io/Vafls/)
 - [💼 linkedin](https://www.linkedin.com/in/%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D0%B0%D0%BD%D1%82%D0%B8%D0%BD-%D1%81%D0%B8%D0%B4%D0%BE%D1%80%D1%83%D0%BA-81b523311/)
-- [👾 Discord] - vafls.
-- [📧 email] - sidorukkostya998@outlook.com
+- [👾 Discord] **`vafls.`** → [📋](https://.../copy-discord.html)
+- [📧 Email] **`sidorukkostya998@outlook.com`** → [📋](https://.../copy-email.html)
