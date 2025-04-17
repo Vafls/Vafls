@@ -43,3 +43,9 @@
 ![Vafls' GitHub stats](https://github-readme-stats.vercel.app/api?username=Vafls&show_icons=true&theme=dracula)
 ![Vafls' Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Vafls&layout=compact&theme=gruvbox)
 
+---
+
+### 🔗 Links
+- [🌍 webpage](https://vafls.github.io/Vafls/)
+- [💼 linkedin](https://linkedin.com/in/your-profile)
+- [📧 email](sidorukkostya998@outlook.com)
