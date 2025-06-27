@@ -14,7 +14,7 @@
 - ⚙️ I explore **circuit design**, working with **transistors and hybrid parameters**.
 
 ### 🧪 Operating Systems I Use:
-- Fedora Linux 🐧  
+- Rocky Linux 🐧  
 - Windows 🌴
 
 ---
