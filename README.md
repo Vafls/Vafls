@@ -40,7 +40,7 @@
 
 ### 📊 Statistics
 
-![Vafls' GitHub stats](https://github-readme-stats.vercel.app/api?username=Vafls&show_icons=true&theme=dracula)
+![Vafls' GitHub stats](https://github-readme-streak-stats.herokuapp.com/?user=Vafls&theme=dracula)
 ![Vafls' Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Vafls&layout=compact&theme=gruvbox)
 
 ---
